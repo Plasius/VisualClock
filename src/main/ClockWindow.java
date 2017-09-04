@@ -15,15 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 
 public class ClockWindow extends JFrame{
-	//uncomment for testing purposes, also shows usage example
-	/*
-	public static void main(String[] args) {
-		ClockWindow frame= new ClockWindow();
-		frame.setVisible(true);
-		
-	}*/
-	
-	
 	JProgressBar progressBar;
 	JLabel progressLabel;
 	
@@ -35,7 +26,8 @@ public class ClockWindow extends JFrame{
 		screenSize= Toolkit.getDefaultToolkit().getScreenSize();
 		setSize(screenSize.width/4, screenSize.width/4);
 		setLocation(screenSize.width-getWidth(), (int)(screenSize.height-getHeight()*1.1));
-	    //setUndecorated(true);	//it does the job
+		setResizable(false);
+	    setUndecorated(true);	//it does the job
 	    
 	    //main frame
 	    DrawPanel mainFrame= new DrawPanel();
@@ -43,26 +35,6 @@ public class ClockWindow extends JFrame{
 	    mainFrame.setLayout(new FlowLayout());
 	    add(mainFrame);
 	    
-	    /*
-				    //initializing the elements
-					progressBar = new JProgressBar(0, 144);
-					progressBar.setOrientation(JProgressBar.VERTICAL);
-					progressBar.setString("");
-					progressBar.setValue(getProgress());
-					progressBar.setStringPainted(true);
-					mainFrame.add(progressBar);
-					
-					progressLabel=new JLabel();
-					progressLabel.setText(getProgress()*100/144+"%");
-					mainFrame.add(progressLabel);
-		*/
-	}
-	
-	@Override
-	public void setVisible(boolean b){
-		super.setVisible(b);
-		setTitle(getProgress()*100/144+"% passed of the day");
-		
 	}
 	
 	//returns an int between 0 and 144 representing the passed 10-minutes
@@ -75,6 +47,7 @@ public class ClockWindow extends JFrame{
 		
 	}
 	
+	//inner class to draw data
 	class DrawPanel extends JPanel {
 		@Override
         public void paintComponent(Graphics g) {
